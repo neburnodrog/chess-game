@@ -2,10 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { Game } from "./Game";
+import { Header } from "./components/Header";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
+    <Header></Header>
     <Game />
   </React.StrictMode>,
   document.getElementById("root")
