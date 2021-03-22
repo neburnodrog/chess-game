@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 export const BoardStyle = styled.div`
-  height: 800px;
-  width: 800px;
+  height: 400px;
+  width: 400px;
   border: 0px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row-reverse;
+  margin: auto;
 `;
 
 export type SquareStyleProps = {
@@ -15,10 +16,10 @@ export type SquareStyleProps = {
 };
 
 export const SquareStyle = styled.button<SquareStyleProps>`
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   border: 0px;
-  background: ${({ black }) => (black ? "black" : "blanchedalmond")};
+  background: ${({ black }) => (black ? "#c48830" : "#e6c981")};
 `;
 
 export const Board = () => {
@@ -35,7 +36,18 @@ export const Board = () => {
   });
 
   const renderSquare = (index: number) => {
-    return <SquareStyle key={index} black={index % 2 === 0}></SquareStyle>;
+    const Columns = "ABCDEFGH";
+    const Column = Columns[index % 8];
+    const Rank = Math.floor(index / 8);
+    const isEvenRank = Boolean(Rank % 2);
+
+    return (
+      <SquareStyle
+        key={`${Column}${Rank + 1}`}
+        black={isEvenRank ? index % 2 !== 0 : index % 2 === 0}
+        id={`${Column}${Rank + 1}`}
+      ></SquareStyle>
+    );
   };
 
   return (
