@@ -4,7 +4,7 @@ import { Board } from "./components/Board";
 
 // Forsyth-Edwards-Notation
 const initialPosition =
-  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+  "rnbqkbnr/pppppppp/--------/--------/--------/--------/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 const board = (() => {
   const files = ["a", "b", "c", "d", "e", "f", "g", "h"];
@@ -24,11 +24,11 @@ const GameStyle = styled.div`
 `;
 
 export const Game: React.FC = () => {
-  const [position, setPosition] = useState(initialPosition);
+  const [fenString, setFenString] = useState(initialPosition);
 
   return (
     <GameStyle>
-      <Board position={position} board={board}></Board>
+      <Board fenString={fenString} board={board}></Board>
     </GameStyle>
   );
 };

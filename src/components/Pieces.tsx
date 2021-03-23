@@ -1,33 +1,31 @@
 import styled from "styled-components";
-import BishopPath from "../images/icons8-bishop-100.png";
-import KingPath from "../images/icons8-king-100.png";
-import KnightPath from "../images/icons8-knight-100.png";
-import PawnPath from "../images/icons8-pawn-100.png";
-import QueenPath from "../images/icons8-queen-100.png";
-import RookPath from "../images/icons8-rook-100.png";
+import * as React from "react";
+import PieceMapping from "./helper_funcs/pieceMappings";
 
-const PieceContainer = styled.div``;
-
-export const Bishop: React.FC = () => {
-  return <PieceContainer>{BishopPath}</PieceContainer>;
+type PieceImgProps = {
+  isWhite: boolean;
 };
 
-export const Knight: React.FC = () => {
-  return <PieceContainer>{KnightPath}</PieceContainer>;
+const PieceImg = styled.img<PieceImgProps>`
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  ${(props) =>
+    props.isWhite ? "filter: invert(100%);" : "filter: invert(0%);"};
+`;
+
+export type PieceProps = {
+  pieceType: string;
 };
 
-export const Rook: React.FC = () => {
-  return <PieceContainer>{RookPath}</PieceContainer>;
-};
-
-export const King: React.FC = () => {
-  return <PieceContainer>{KingPath}</PieceContainer>;
-};
-
-export const Queen: React.FC = () => {
-  return <PieceContainer>{QueenPath}</PieceContainer>;
-};
-
-export const Pawn: React.FC = () => {
-  return <PieceContainer>{PawnPath}</PieceContainer>;
+export const Piece: React.FC<PieceProps> = ({ pieceType }) => {
+  const path = PieceMapping.get(pieceType.toLowerCase());
+  const isWhite = pieceType === pieceType.toUpperCase();
+  return (
+    <PieceImg
+      isWhite={isWhite}
+      src={path}
+      alt={pieceType === "-" ? " " : pieceType}
+    />
+  );
 };
